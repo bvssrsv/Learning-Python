@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"C:\Users\home\Downloads\2285297.csv", parse_dates = ['DATE'])
+#print(df.head(5),df.columns)
+
+np_maxtemp= df.loc[:,['TMAX']]
+np_mintemp= df.loc[:,['TMIN']]
+np_maxtemp= df.loc[:,['PRCP']]
+np_date= df.loc[:,['DATE']]
+df['np_quarter'] = pd.PeriodIndex(df.DATE, freq='Q')
+
+
+avg_tmax=df.groupby(by=['np_quarter'])['TMAX'].mean()
+avg_tmin=df.groupby(by=['np_quarter'])['TMIN'].mean()
+avg_prec=df.groupby(by=['np_quarter'])['PRCP'].mean()
+
+print(df['np_quarter'])
+
+print(df.head(20))
+#print(avg_tmax)
+
+#plt.plot(df['np_quarter'])
+#plt.ylabel(avg_prec)
+#plt.show()
